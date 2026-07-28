@@ -10,7 +10,7 @@ use Multek\CustomerEngagement\DTOs\Customer;
 use Multek\CustomerEngagement\DTOs\CustomerEvent;
 use Multek\CustomerEngagement\DTOs\Notification;
 
-class NullDriver implements EngagementDriver, SyncsUsers, SendsNotifications, TracksEvents
+class NullDriver implements EngagementDriver, SendsNotifications, SyncsUsers, TracksEvents
 {
     public function getName(): string
     {
