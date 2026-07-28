@@ -22,12 +22,24 @@ return [
     | Define your available engagement drivers here. Each driver package
     | (e.g. multek/laravel-onesignal) registers itself via extend().
     |
+    | Each driver may declare a capability policy under 'capabilities'
+    | (keys: users, notifications, events). Missing keys default to
+    | enabled. A disabled capability makes the corresponding checks
+    | return false and turns guarded calls into silent no-ops —
+    | useful when a plan blocks a feature (e.g. OneSignal Free
+    | rejects custom events with 403).
+    |
     */
 
     'drivers' => [
         // 'onesignal' => [
         //     'app_id' => env('ONESIGNAL_APP_ID'),
         //     'rest_api_key' => env('ONESIGNAL_REST_API_KEY'),
+        //     'capabilities' => [
+        //         'users' => true,
+        //         'notifications' => true,
+        //         'events' => env('ONESIGNAL_TRACK_EVENTS', true),
+        //     ],
         // ],
     ],
 
