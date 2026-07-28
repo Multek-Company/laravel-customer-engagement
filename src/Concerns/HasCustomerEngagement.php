@@ -29,6 +29,21 @@ trait HasCustomerEngagement
         return $attributes;
     }
 
+    public function getEngagementLanguage(): ?string
+    {
+        return null;
+    }
+
+    public function getEngagementTimezone(): ?string
+    {
+        return null;
+    }
+
+    public function getEngagementCountry(): ?string
+    {
+        return null;
+    }
+
     public function toEngagementCustomer(): Customer
     {
         return new Customer(
@@ -37,6 +52,9 @@ trait HasCustomerEngagement
             phone: data_get($this, 'phone'),
             name: data_get($this, 'name'),
             attributes: $this->getEngagementAttributes(),
+            language: $this->getEngagementLanguage(),
+            timezone: $this->getEngagementTimezone(),
+            country: $this->getEngagementCountry(),
         );
     }
 
@@ -54,6 +72,14 @@ trait HasCustomerEngagement
 
     public function syncToEngagementAsync(?string $driver = null): void
     {
+        if (config('customer-engagement.skip_async_when_null', false)) {
+            $effective = $driver ?? config('customer-engagement.default', 'null');
+
+            if ($effective === 'null') {
+                return;
+            }
+        }
+
         SyncCustomer::dispatch($this, $driver);
     }
 

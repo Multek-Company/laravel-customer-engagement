@@ -14,6 +14,14 @@ use Multek\CustomerEngagement\DTOs\Notification;
 
 class EngagementManager extends Manager
 {
+    protected const CAPABILITIES = [
+        SyncsUsers::class => 'users',
+        SendsNotifications::class => 'notifications',
+        TracksEvents::class => 'events',
+    ];
+
+    protected ?NullDriver $noopDriver = null;
+
     public function getDefaultDriver(): string
     {
         return $this->config->get('customer-engagement.default', 'null');
@@ -28,17 +36,20 @@ class EngagementManager extends Manager
 
     public function syncsUsers(?string $driver = null): bool
     {
-        return $this->driver($driver) instanceof SyncsUsers;
+        return $this->capabilityEnabled('users', $driver)
+            && $this->driver($driver) instanceof SyncsUsers;
     }
 
     public function sendsNotifications(?string $driver = null): bool
     {
-        return $this->driver($driver) instanceof SendsNotifications;
+        return $this->capabilityEnabled('notifications', $driver)
+            && $this->driver($driver) instanceof SendsNotifications;
     }
 
     public function tracksEvents(?string $driver = null): bool
     {
-        return $this->driver($driver) instanceof TracksEvents;
+        return $this->capabilityEnabled('events', $driver)
+            && $this->driver($driver) instanceof TracksEvents;
     }
 
     // ── SyncsUsers Pass-throughs ───────────────────────────────────────
@@ -94,8 +105,30 @@ class EngagementManager extends Manager
 
     // ── Internal ───────────────────────────────────────────────────────
 
+    protected function capabilityEnabled(string $capability, ?string $driver = null): bool
+    {
+        $name = $driver ?? $this->getDefaultDriver();
+
+        return (bool) $this->config->get(
+            "customer-engagement.drivers.{$name}.capabilities.{$capability}",
+            true,
+        );
+    }
+
     protected function resolveCapability(string $interface, ?string $driver = null): EngagementDriver
     {
+        $capability = self::CAPABILITIES[$interface];
+
+        if (! $this->capabilityEnabled($capability, $driver)) {
+            $name = $driver ?? $this->getDefaultDriver();
+
+            $this->container['log']->debug(
+                "Engagement capability [{$capability}] is disabled by policy for driver [{$name}]; call ignored."
+            );
+
+            return $this->noopDriver ??= new NullDriver;
+        }
+
         $resolved = $this->driver($driver);
 
         if (! $resolved instanceof $interface) {

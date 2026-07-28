@@ -26,7 +26,7 @@ use Multek\CustomerEngagement\EngagementManager;
  * @method static void trackEvents(array $events, ?string $driver = null)
  * @method static EngagementManager extend(string $driver, \Closure $callback)
  *
- * @see \Multek\CustomerEngagement\EngagementManager
+ * @see EngagementManager
  */
 class Engagement extends Facade
 {

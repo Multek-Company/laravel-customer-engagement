@@ -12,6 +12,9 @@ class Customer
         public readonly array $attributes = [],
         public readonly array $segments = [],
         public readonly ?string $idempotencyId = null,
+        public readonly ?string $language = null,
+        public readonly ?string $timezone = null,
+        public readonly ?string $country = null,
     ) {}
 
     public static function fromArray(array $data): static
@@ -24,6 +27,9 @@ class Customer
             attributes: $data['attributes'] ?? [],
             segments: $data['segments'] ?? [],
             idempotencyId: $data['idempotency_id'] ?? null,
+            language: $data['language'] ?? null,
+            timezone: $data['timezone'] ?? null,
+            country: $data['country'] ?? null,
         );
     }
 
@@ -37,6 +43,9 @@ class Customer
             'attributes' => $this->attributes,
             'segments' => $this->segments,
             'idempotency_id' => $this->idempotencyId,
+            'language' => $this->language,
+            'timezone' => $this->timezone,
+            'country' => $this->country,
         ];
     }
 
@@ -50,6 +59,9 @@ class Customer
             attributes: $overrides['attributes'] ?? $this->attributes,
             segments: $overrides['segments'] ?? $this->segments,
             idempotencyId: array_key_exists('idempotency_id', $overrides) ? $overrides['idempotency_id'] : $this->idempotencyId,
+            language: array_key_exists('language', $overrides) ? $overrides['language'] : $this->language,
+            timezone: array_key_exists('timezone', $overrides) ? $overrides['timezone'] : $this->timezone,
+            country: array_key_exists('country', $overrides) ? $overrides['country'] : $this->country,
         );
     }
 }
