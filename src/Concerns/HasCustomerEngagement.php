@@ -72,6 +72,14 @@ trait HasCustomerEngagement
 
     public function syncToEngagementAsync(?string $driver = null): void
     {
+        if (config('customer-engagement.skip_async_when_null', false)) {
+            $effective = $driver ?? config('customer-engagement.default', 'null');
+
+            if ($effective === 'null') {
+                return;
+            }
+        }
+
         SyncCustomer::dispatch($this, $driver);
     }
 

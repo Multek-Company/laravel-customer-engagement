@@ -71,4 +71,18 @@ return [
 
     'queue' => env('ENGAGEMENT_QUEUE', 'default'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Skip Async Dispatch When Null
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, syncToEngagementAsync() will not dispatch the SyncCustomer
+    | job if the resolved driver is the null driver — keeping local/test
+    | queues quiet. Off by default: the null-driver round-trip keeps the
+    | pipeline observable (Horizon) and test dispatch assertions green.
+    |
+    */
+
+    'skip_async_when_null' => env('ENGAGEMENT_ASYNC_SKIP_NULL', false),
+
 ];
