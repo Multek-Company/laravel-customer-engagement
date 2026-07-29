@@ -1,5 +1,20 @@
 # Laravel Customer Engagement
 
+> [!CAUTION]
+> **This package is deprecated and no longer maintained.**
+>
+> It is frozen at **v1.1.0**. There will be no further releases, bug fixes, or security
+> updates, and it has been removed from Packagist — `composer require multek/laravel-customer-engagement`
+> will no longer resolve.
+>
+> **Migrate to [`multek/laravel-onesignal`](https://github.com/Multek-Company/laravel-onesignal) v2.0.0 or later.**
+> As of v2.0.0, `laravel-onesignal` is standalone — it no longer depends on this package and
+> carries its own contracts, DTOs, notification channel, and model trait. See its README for
+> the migration path.
+>
+> The code here remains available for reference and for anyone pinned to an existing
+> `composer.lock`, but the repository is archived and read-only.
+
 A unified customer engagement platform for Laravel. Provides contracts, DTOs, and a driver-based manager for push notifications, user sync, and event tracking across multiple providers.
 
 ## Features
