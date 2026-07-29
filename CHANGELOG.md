@@ -5,6 +5,17 @@ All notable changes to `multek/laravel-customer-engagement` will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-07-29
+
+### Deprecated
+
+- **This package is deprecated and no longer maintained.** It is frozen at the v1.1.0 feature
+  set; this release only adds deprecation metadata. Marked `"abandoned": "multek/laravel-onesignal"`
+  in `composer.json`, so Composer now emits a replacement hint on install/update. The package
+  has been removed from Packagist and the repository is archived read-only.
+- **Replacement:** [`multek/laravel-onesignal`](https://github.com/Multek-Company/laravel-onesignal)
+  v2.0.0+, which is standalone as of v2.0.0 and no longer depends on this package.
+
 ## [1.1.0] - 2026-07-28
 
 ### Added

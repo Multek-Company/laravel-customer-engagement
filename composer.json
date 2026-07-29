@@ -1,6 +1,7 @@
 {
     "name": "multek/laravel-customer-engagement",
-    "description": "A unified customer engagement platform for Laravel — contracts, DTOs, and manager for push notifications, user sync, and event tracking across multiple providers.",
+    "description": "[DEPRECATED — use multek/laravel-onesignal] A unified customer engagement platform for Laravel — contracts, DTOs, and manager for push notifications, user sync, and event tracking across multiple providers.",
+    "abandoned": "multek/laravel-onesignal",
     "keywords": ["laravel", "customer-engagement", "notifications", "push", "onesignal", "braze", "firebase"],
     "license": "MIT",
     "authors": [
